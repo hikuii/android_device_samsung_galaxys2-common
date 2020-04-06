@@ -11,19 +11,19 @@ echo "         This script creates a valid boot.img based on fresh build ROM so 
 echo "         After flashing Magisk, this script continues and extracts the ramdisk.cpio and rebuilds the kernel with Magisk modified ramdisk.cpio."
 echo "         Finally it flashes /dev/block/mmcblk0p5 with the Magisk patched kernel."
 echo ""
-echo "IMPORTANT: This script needs a MicroSD-card."
-echo "           Original /dev/block/mmcblk0p5 is written to /sdcard1/boot_orig.img"
-echo "           Magisk reflashable file is written to /sdcard1/boot_magisk.img"
+echo "IMPORTANT: This script utilizes tmpfs (/tmp)."
+echo "           Original /dev/block/mmcblk0p5 is written to /tmp/boot_orig.img"
+echo "           Magisk reflashable file is written to /tmp/boot_magisk.img"
 echo ""
 echo "*** CONNECT YOUR PHONE AND MAKE SURE TWRP-RECOVERY IS RUNNING ***"
 echo -n "OK to build and flash Magisk on your device (y/N)?"
 read USERINPUT
 case $USERINPUT in
  y|Y)
-	echo "Backup /dev/block/mmcblk0p5 to /sdcard1/boot_orig.img..."
+	echo "Backup /dev/block/mmcblk0p5 to /tmp/boot_orig.img..."
 	cout
-	adb shell dd if=/dev/block/mmcblk0p5 of=/sdcard1/boot_orig.img
-	echo "Backup /dev/block/mmcblk0p5 to /sdcard1/boot_orig.img... Done!"
+	adb shell dd if=/dev/block/mmcblk0p5 of=/tmp/boot_orig.img
+	echo "Backup /dev/block/mmcblk0p5 to /tmp/boot_orig.img... Done!"
 	echo ""
 
 	echo "Creating valid bootimg for Magisk with ramdisk.cpio..."
@@ -34,15 +34,15 @@ case $USERINPUT in
 	echo ""
 
 	echo "Install Magisk in TWRP now!"
-	echo "If you stop now, you need to flash /sdcard1/boot_orig.img before booting your phone!"
+	echo "If you stop now, you need to flash /tmp/boot_orig.img before booting your phone!"
 	read -p "Press [ENTER] to continue"
 	echo ""
 
 	echo "Extracting modified Magisk-ramdisk from /dev/block/mmcblk0p5..."
-	adb shell dd if=/dev/block/mmcblk0p5 of=/sdcard1/boot.img.magisk
-	adb pull /sdcard1/boot.img.magisk
+	adb shell dd if=/dev/block/mmcblk0p5 of=/tmp/boot.img.magisk
+	adb pull /tmp/boot.img.magisk
 	abootimg -x boot.img.magisk
-	adb shell rm /sdcard1/boot.img.magisk
+	adb shell rm /tmp/boot.img.magisk
 	rm ramdisk.cpio
 	rm bootimg.cfg
 	rm boot.img.magisk
@@ -68,9 +68,9 @@ case $USERINPUT in
 	adb push kernel /dev/block/mmcblk0p5
 	echo "Flashing Magisk-kernel to /dev/block/mmcblk0p5... Done!"
 
-	echo "Pushing flashable /sdcard1/boot_magisk.img..."
-	adb push boot.img /sdcard1/boot_magisk.img
-	echo "Pushing flashable /sdcard1/boot_magisk.img... Done!"
+	echo "Pushing flashable /tmp/boot_magisk.img..."
+	adb push boot.img /tmp/boot_magisk.img
+	echo "Pushing flashable /tmp/boot_magisk.img... Done!"
 	echo ""
 	croot
 	rm buildspec.mk
