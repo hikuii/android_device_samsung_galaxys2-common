@@ -75,10 +75,10 @@ TARGET_RELEASETOOLS_EXTENSIONS := ./device/samsung/galaxys2-common
 
 # Hardware tunables
 BOARD_HARDWARE_CLASS := hardware/samsung/cmhw \
-    device/samsung/galaxys2-common/cmhw
+    device/samsung/galaxys2-common/configs/cmhw
 
 # Graphics
-BOARD_EGL_CFG := device/samsung/galaxys2-common/configs/egl.cfg
+BOARD_EGL_CFG := device/samsung/galaxys2-common/configs/graphics/egl.cfg
 BOARD_EGL_NEEDS_HANDLE_VALUE := true
 USE_OPENGL_RENDERER := true
 TARGET_REQUIRES_SYNCHRONOUS_SETSURFACE := true
@@ -112,7 +112,7 @@ BOARD_USE_YAMAHA_MC1N2_AUDIO := true
 # RIL
 BOARD_PROVIDES_LIBRIL := true
 BOARD_MODEM_TYPE := xmm6260
-BOARD_RIL_CLASS := ../../../device/samsung/galaxys2-common/ril
+BOARD_RIL_CLASS := ../../../device/samsung/galaxys2-common/configs/ril
 BOARD_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
 
 # Camera
@@ -135,14 +135,12 @@ WIFI_DRIVER_FW_PATH_P2P     := "/system/etc/wifi/bcmdhd_p2p.bin"
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_HAVE_SAMSUNG_BLUETOOTH := true
-BOARD_CUSTOM_BT_CONFIG := device/samsung/galaxys2-common/bluetooth/vnd_smdk4210.txt
+BOARD_CUSTOM_BT_CONFIG := device/samsung/galaxys2-common/configs/bluetooth/vnd_smdk4210.txt
 
 # Selinux
-BOARD_SEPOLICY_DIRS += device/samsung/galaxys2-common/selinux
+BOARD_SEPOLICY_DIRS += device/samsung/galaxys2-common/configs/selinux
 
 # Recovery
-BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/galaxys2-common/recovery/recovery_keys.c
-BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/galaxys2-common/recovery/graphics.c
 BOARD_UMS_LUNFILE := "/sys/class/android_usb/android0/f_mass_storage/lun0/file"
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true

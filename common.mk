@@ -30,18 +30,18 @@ PRODUCT_COPY_FILES += \
 
 # Netflix hack
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/configs/98netflix:system/etc/init.d/98netflix
+    $(COMMON_PATH)/configs/misc/98netflix:system/etc/init.d/98netflix
 
 # Audio
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/configs/tinyalsa-audio.xml:system/etc/tinyalsa-audio.xml \
-    $(COMMON_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf
+    $(COMMON_PATH)/configs/audio/tinyalsa-audio.xml:system/etc/tinyalsa-audio.xml \
+    $(COMMON_PATH)/configs/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 # Wifi
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/configs/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
-    $(COMMON_PATH)/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
-    $(COMMON_PATH)/configs/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
+    $(COMMON_PATH)/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+    $(COMMON_PATH)/configs/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
+    $(COMMON_PATH)/configs/wifi/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
 
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
@@ -52,8 +52,8 @@ $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330
 
 # Gps
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/configs/gps.conf:system/etc/gps.conf \
-    $(COMMON_PATH)/configs/sirfgps.conf:system/etc/sirfgps.conf
+    $(COMMON_PATH)/configs/gps/gps.conf:system/etc/gps.conf \
+    $(COMMON_PATH)/configs/gps/sirfgps.conf:system/etc/sirfgps.conf
 
 # Packages
 PRODUCT_PACKAGES := \
@@ -123,8 +123,8 @@ PRODUCT_PACKAGES += \
     libOMX.SEC.M4V.Encoder
 
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
-    $(COMMON_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
+    $(COMMON_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml \
+    $(COMMON_PATH)/configs/media/media_profiles.xml:system/etc/media_profiles.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
@@ -215,7 +215,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/excluded-input-devices.xml:system/etc/excluded-input-devices.xml
+    $(LOCAL_PATH)/configs/misc/excluded-input-devices.xml:system/etc/excluded-input-devices.xml
 
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
