@@ -35,6 +35,13 @@ BOARD_GLOBAL_CFLAGS += -DEXYNOS4_ENHANCEMENTS
 BOARD_GLOBAL_CFLAGS += -DEXYNOS4210_ENHANCEMENTS
 endif
 
+BOARD_GLOBAL_CFLAGS += -Ofast -march=armv7-a+simd -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp -funsafe-math-optimizations -frename-registers -funroll-loops -fopenmp --param l1-cache-line-size=32 --param l1-cache-size=32 --param l2-cache-size=1024
+BOARD_GLOBAL_CPPFLAGS += -Ofast -march=armv7-a+simd -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp -funsafe-math-optimizations -frename-registers -funroll-loops -fopenmp --param l1-cache-line-size=32 --param l1-cache-size=32 --param l2-cache-size=1024
+ARM_HAVE_NEON := true
+ARM_USE_PLD := true
+ARM_CACHE_LINE_SIZE := 32
+GLIBCXX_PARALLEL := true
+
 BOARD_VENDOR := samsung
 TARGET_BOARD_PLATFORM := exynos4
 TARGET_SOC := exynos4210
@@ -51,7 +58,10 @@ BOARD_NAND_PAGE_SIZE := 4096
 BOARD_NAND_SPARE_SIZE := 128
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_BASE := 0x40000000
-BOARD_KERNEL_CMDLINE := console=ttySAC2,115200 consoleblank=0
+BOARD_CUSTOM_BOOTIMG := true
+BOARD_CUSTOM_BOOTIMG_MK := device/samsung/galaxys2-common/shbootimg.mk
+BOARD_USES_FULL_RECOVERY_IMAGE := true
+
 TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 
 # Include an expanded selection of fonts
@@ -59,6 +69,16 @@ EXTENDED_FONT_FOOTPRINT := true
 
 # Memory management
 MALLOC_SVELTE := true
+
+# Dexpreopt
+ifeq ($(HOST_OS),linux)
+  ifneq ($(TARGET_BUILD_VARIANT),eng)
+    ifeq ($(WITH_DEXPREOPT),)
+      WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := false
+      WITH_DEXPREOPT := true
+    endif
+  endif
+endif
 
 # Filesystem
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -101,7 +121,7 @@ BOARD_USE_SAMSUNG_COLORFORMAT := true
 BOARD_NONBLOCK_MODE_PROCESS := true
 BOARD_USE_STOREMETADATA := true
 BOARD_USE_METADATABUFFERTYPE := true
-BOARD_USES_MFC_FPS := true
+BOARD_USES_MFC_FPS := false
 BOARD_USE_S3D_SUPPORT := true
 BOARD_USE_CSC_FIMC := false
 
@@ -117,6 +137,7 @@ BOARD_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
 
 # Camera
 BOARD_CAMERA_HAVE_ISO := true
+TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 
 # WiFi
 BOARD_WLAN_DEVICE := bcmdhd
@@ -141,7 +162,7 @@ BOARD_CUSTOM_BT_CONFIG := device/samsung/galaxys2-common/configs/bluetooth/vnd_s
 BOARD_SEPOLICY_DIRS += device/samsung/galaxys2-common/configs/selinux
 
 # Recovery
-BOARD_UMS_LUNFILE := "/sys/class/android_usb/android0/f_mass_storage/lun0/file"
+BOARD_UMS_LUNFILE := "/sys/class/android_usb/android0/f_mass_storage/lun%d/file"
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
@@ -159,9 +180,6 @@ BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charg
 BOARD_BATTERY_DEVICE_NAME := "battery"
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_SHOW_PERCENTAGE := true
-BOARD_CUSTOM_BOOTIMG := true
-BOARD_CUSTOM_BOOTIMG_MK := device/samsung/galaxys2-common/shbootimg.mk
-BOARD_USES_FULL_RECOVERY_IMAGE := true
 
 # Override healthd HAL
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.exynos4
