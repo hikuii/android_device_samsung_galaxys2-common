@@ -50,10 +50,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
 
-# Gps
+# GPS
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/configs/gps/gps.conf:system/etc/gps.conf \
+    $(COMMON_PATH)/configs/gps/gps.conf:system/etc/gps.conf
+
+ifneq ($(filter i9100,$(TARGET_DEVICE)),)
+PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/gps/sirfgps.conf:system/etc/sirfgps.conf
+endif
 
 # Packages
 PRODUCT_PACKAGES := \
