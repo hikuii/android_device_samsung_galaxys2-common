@@ -70,7 +70,8 @@ PRODUCT_PACKAGES += \
     libsamsung_symbols \
     libsecril-shim \
     ipc-modem \
-    libsamsung-ril
+    libsamsung-ril \
+    libsecril-client
 
 # Legacy GPS
 PRODUCT_PACKAGES += \
