@@ -82,7 +82,6 @@ PRODUCT_PACKAGES += \
 
 # Audio Packages
 PRODUCT_PACKAGES += \
-    AdvancedDisplay \
     audio.primary.exynos4 \
     audio.a2dp.default \
     audio.r_submix.default \
@@ -150,9 +149,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Services
 PRODUCT_PROPERTY_OVERRIDES += \
     config.disable_atlas=true
-
-PRODUCT_PACKAGES += \
-    SamsungDoze
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
