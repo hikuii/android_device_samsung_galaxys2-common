@@ -35,8 +35,8 @@ BOARD_GLOBAL_CFLAGS += -DEXYNOS4_ENHANCEMENTS
 BOARD_GLOBAL_CFLAGS += -DEXYNOS4210_ENHANCEMENTS
 endif
 
-BOARD_GLOBAL_CFLAGS += -Ofast -march=armv7-a+simd -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp -funsafe-math-optimizations -frename-registers -funroll-loops -fopenmp --param l1-cache-line-size=32 --param l1-cache-size=32 --param l2-cache-size=1024
-BOARD_GLOBAL_CPPFLAGS += -Ofast -march=armv7-a+simd -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp -funsafe-math-optimizations -frename-registers -funroll-loops -fopenmp --param l1-cache-line-size=32 --param l1-cache-size=32 --param l2-cache-size=1024
+BOARD_GLOBAL_CFLAGS += -O3 -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp -funsafe-math-optimizations -funroll-loops -fopenmp --param l1-cache-line-size=32 --param l1-cache-size=32 --param l2-cache-size=1024
+BOARD_GLOBAL_CPPFLAGS += -O3 -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp -funsafe-math-optimizations -funroll-loops -fopenmp --param l1-cache-line-size=32 --param l1-cache-size=32 --param l2-cache-size=1024
 ARM_HAVE_NEON := true
 ARM_USE_PLD := true
 ARM_CACHE_LINE_SIZE := 32
