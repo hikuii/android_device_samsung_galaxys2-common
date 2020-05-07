@@ -54,8 +54,11 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/gps/gps.conf:system/etc/gps.conf
 
 ifneq ($(filter i9100,$(TARGET_DEVICE)),)
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/configs/gps/sirfgps.conf:system/etc/sirfgps.conf
+    PRODUCT_COPY_FILES += \
+        $(COMMON_PATH)/configs/gps/sirfgps.conf:system/etc/sirfgps.conf
+
+    PRODUCT_PACKAGES += \
+        gps.smdk4210
 endif
 
 # Packages
@@ -71,10 +74,6 @@ PRODUCT_PACKAGES += \
     ipc-modem \
     libsamsung-ril \
     libsecril-client
-
-# Legacy GPS
-PRODUCT_PACKAGES += \
-    gps.smdk4210
 
 # SamsungPowerHAL
 PRODUCT_PACKAGES += \
