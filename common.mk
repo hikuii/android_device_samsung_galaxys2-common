@@ -66,10 +66,6 @@ PRODUCT_PACKAGES += \
     ipc-modem \
     libsecril-client
 
-# SamsungPowerHAL
-PRODUCT_PACKAGES += \
-    power.smdk4210
-
 # Audio Packages
 PRODUCT_PACKAGES += \
     audio.primary.exynos4 \
