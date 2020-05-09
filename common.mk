@@ -63,7 +63,6 @@ PRODUCT_PACKAGES := \
 PRODUCT_PACKAGES += \
     libsamsung_symbols \
     libsecril-shim \
-    ipc-modem \
     libsecril-client
 
 # Audio Packages
