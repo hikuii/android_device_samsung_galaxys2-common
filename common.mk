@@ -112,7 +112,6 @@ PRODUCT_PACKAGES += \
 
 # HAL
 PRODUCT_PACKAGES += \
-    AdvancedDisplay \
     vendor.lineage.livedisplay@2.0-service.samsung-exynos \
     android.hardware.graphics.allocator@2.0-impl-exynos4 \
     android.hardware.graphics.mapper@2.0-impl-exynos4 \
@@ -211,9 +210,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Services
 PRODUCT_PROPERTY_OVERRIDES += \
     config.disable_atlas=true
-
-PRODUCT_PACKAGES += \
-    SamsungDoze
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
