@@ -90,17 +90,9 @@ PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-service.exynos4 \
     gps.smdk4210
 
-# SamsungPowerHAL
-PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-service.exynos4
-
 # Battery
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.small_battery=true
-
-# Trust HAL
-PRODUCT_PACKAGES += \
-    vendor.lineage.trust@1.0-service
 
 # Use legacy ADB USB support
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -119,7 +111,6 @@ PRODUCT_PACKAGES += \
 # HAL
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service.samsung \
-    vendor.lineage.livedisplay@2.0-service.samsung-exynos \
     android.hardware.graphics.allocator@2.0-impl-exynos4 \
     android.hardware.graphics.mapper@2.0-impl-exynos4 \
     android.hardware.graphics.composer@2.1-impl \
