@@ -82,7 +82,8 @@ PRODUCT_PACKAGES += \
 # Legacy RIL
 PRODUCT_PACKAGES += \
     libsamsung_symbols \
-    libsecril-shim
+    libsecril-shim \
+    libsecril-client
 
 # Legacy GPS
 PRODUCT_PACKAGES += \
