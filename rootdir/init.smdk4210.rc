@@ -5,10 +5,10 @@ on init
     mkdir /mnt 0775 root system
     mkdir /mnt/.lfs 0755 root root
 
-# Permissions for PowerHAL
+    # Permissions for PowerHAL
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 
-# Disable CFQ slice idle delay
+    # Disable CFQ slice idle delay
     write /sys/block/mmcblk0/queue/iosched/slice_idle 0
 
 on fs
@@ -28,22 +28,17 @@ on fs
     chmod 0770 /data/misc/wifi 
 
 on charger
-
-# CPU Frequency Governor
+    # CPU Frequency Governor
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor powersave
 
-# EHCI runtime enable for LPA
+    # EHCI runtime enable for LPA
     write /sys/devices/platform/s5p-ehci/power/control auto
 
 on post-fs-data
-# insmod kernel modules
-    insmod /system/lib/modules/j4fs.ko
-    insmod /system/lib/modules/Si4709_driver.ko
-
-# mount param.lfs
+    # mount param.lfs
     mount j4fs /dev/block/mmcblk0p4 /mnt/.lfs
 
-# GPS
+    # GPS
     chown root system /dev/ttySAC1
     chmod 0660 /dev/ttySAC1
     chown root system /sys/class/sec/gps/GPS_PWR_EN/value
@@ -80,28 +75,28 @@ on post-fs-data
     chown system root /data/.mac.info
     chmod 0664 /data/.mac.info
 
-    #Added drm folder to copy drm plugins
+    # Added drm folder to copy drm plugins
     mkdir /system/lib/drm 0775
     chown root root /system/lib/drm
     chmod 0775 /system/lib/drm
 
-# SELinux restore context for efs files
+    # SELinux restore context for efs files
     restorecon_recursive /efs
 
-# MTP Device permission.
+    # MTP Device permission.
     chmod 0660 /dev/mtp_usb
     chown system mtp /dev/mtp_usb
 
-# terminal mode
+    # terminal mode
     chmod 0660 /sys/class/android_usb/android0/terminal_version
     chown system system /sys/class/android_usb/android0/terminal_version
 
-# NFC
+    # NFC
     setprop ro.nfc.port "I2C"
     chmod 0600 /dev/pn544
     chown nfc nfc /dev/pn544
 
-# setup for alsa snd device
+    # setup for alsa snd device
     chmod 0770 /dev/snd/pcmC0D0c
     chmod 0770 /dev/snd/pcmC0D0p
     chmod 0770 /dev/snd/controlC0
@@ -115,7 +110,7 @@ on post-fs-data
     chmod 0775 /data/log
     chmod 0775 /data/anr
 
-#panorama directory creation
+    # panorama directory creation
     mkdir /data/pxtmpdir 0775
     chown system system /data/pxtmpdir
     chmod 0775 /data/pxtmpdir
@@ -123,11 +118,11 @@ on post-fs-data
     # permission for HDMI audio path
     chown media audio /sys/class/hdmi_audio/hdmi_audio/hdmi_audio_set_ext
 
-# Permissions for gpio_keys.
+    # Permissions for gpio_keys.
     chown system radio /sys/class/sec/sec_key/wakeup_keys 
     write /sys/class/sec/sec_key/wakeup_keys  102,116
 
-# Add permission for ATM. 2010.03.20
+    # Add permission for ATM. 2010.03.20
     chown system radio /sys/devices/platform/i2c-gpio.9/i2c-9/9-0036/power_supply/fuelgauge/fg_read_soc
     chown system radio /sys/devices/platform/i2c-gpio.9/i2c-9/9-0036/power_supply/fuelgauge/fg_reset_soc
     chown system radio /sys/devices/platform/sec-battery/power_supply/battery/batt_lpm_state
@@ -154,7 +149,7 @@ on post-fs-data
     chown system system /sys/class/backlight/panel/brightness
     chown system system /sys/class/power_supply/battery/temp
 
-# Permissions for input devices
+    # Permissions for input devices
     chown system radio /sys/devices/virtual/sec/sec_key/sec_key_pressed
 
     chown system radio /sys/devices/virtual/sec/sec_touchkey/force_disable
@@ -198,7 +193,7 @@ on post-fs-data
     chown system radio /sys/devices/virtual/sec/sec_touchscreen/tsp_config_version
     chown system radio /sys/devices/virtual/sec/sec_touchscreen/tsp_touchtype
 
-# Permissions for bluetooth
+    # Permissions for bluetooth
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
     chown bluetooth bluetooth ro.bt.bdaddr_path
     chown bluetooth bluetooth /dev/ttySAC0
@@ -207,20 +202,20 @@ on post-fs-data
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
 
-# Vibetonz
+    # Vibetonz
     chmod 0660 /dev/tspdrv
     chown root shell /dev/tspdrv
     chmod 0660 /sys/class/timed_output/vibrator/pwm_value
     chown system system /sys/class/timed_output/vibrator/pwm_value
 
-# Permissions for LCD
+    # Permissions for LCD
     chown system radio /sys/class/lcd/panel/lcd_power
     chown system radio /sys/class/lcd/panel/lcd_type
     chown system media_rw /sys/class/lcd/panel/gamma_mode
     chown system media_rw /sys/class/lcd/panel/power_reduce
     chown system system /sys/class/backlight/panel/auto_brightness
 
-# Permissions for mDNIe
+    # Permissions for mDNIe
     chown system media_rw /sys/class/mdnie/mdnie/mode
     chown system media_rw /sys/class/mdnie/mdnie/scenario
     chown system media_rw /sys/class/mdnie/mdnie/outdoor
@@ -230,17 +225,8 @@ on post-fs-data
     chown system media_rw /sys/class/mdnie/mdnie/g_adj
     chown system media_rw /sys/class/mdnie/mdnie/b_adj
     chown system media_rw /sys/class/mdnie/mdnie/tuning
-    write /sys/class/mdnie/mdnie/scenario 0
-    write /sys/class/mdnie/mdnie/outdoor 0
-    write /sys/class/mdnie/mdnie/mode 1
-    write /sys/class/mdnie/mdnie/accessibility 0
-    write /sys/class/mdnie/mdnie/rgb_adj_enable 1
-    write /sys/class/mdnie/mdnie/r_adj 255
-    write /sys/class/mdnie/mdnie/g_adj 255
-    write /sys/class/mdnie/mdnie/b_adj 255
-    write /sys/class/mdnie/mdnie/tuning 0
 
-# Permissions for uart_sel and usb_sel
+    # Permissions for uart_sel and usb_sel
     chown system radio /sys/class/sec/switch/uart_sel/value
     chown system radio /sys/class/sec/switch/usb_sel
     chown system radio /sys/class/sec/switch/audio_path
@@ -250,34 +236,29 @@ on post-fs-data
     chown system radio /sys/class/sec/switch/adc
     chown system radio /mnt/.lfs/sw_sel
 
-# Permissions for OTG Test
+    # Permissions for OTG Test
     chown system radio /sys/class/host_notify/usb_otg/booster
     chmod 0664 /sys/class/host_notify/usb_otg/booster
 
-# Permission for radio
+    # Permission for radio
     chown system radio /sys/devices/platform/s5p-ehci/ehci_power
     chown system radio /sys/devices/platform/s5p-ehci/ehci_runtime
     chown system radio /sys/devices/virtual/misc/multipdp/waketime    
 
-# for datarouter
+    # for datarouter
     chown system system /dev/dun
     chown system system /dev/ttyGS0
     chown system system /dev/ttyGS1
     chown system system /dev/ttyGS2
     chown system system /dev/ttyGS3
 
-#panorama directory creation
-    mkdir /data/pxtmpdir 0775
-    chown system system /data/pxtmpdir
-    chmod 0775 /data/pxtmpdir
-
-# backlight permissions
+    # backlight permissions
     chown system system /sys/class/backlight/pwm-backlight/brightness
     chmod 0660 /sys/class/backlight/pwm-backlight/brightness
     chown radio system /sys/devices/virtual/misc/melfas_touchkey/brightness
     chmod 0660 /sys/devices/virtual/misc/melfas_touchkey/brightness
 
-# Permissions for dvfs lock
+    # Permissions for dvfs lock
     chown system system /sys/power/cpufreq_max_limit
     chown system system /sys/power/cpufreq_min_limit
     chmod 0660 /sys/power/cpufreq_max_limit
@@ -286,14 +267,14 @@ on post-fs-data
     chown system system /sys/power/gpu_lock
     chmod 0660 /sys/power/gpu_lock
 
-# Permisions for sensors
+    # Permisions for sensors
     chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_selftest
     chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_get_temp
     chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_power_on
     chown radio system /sys/devices/virtual/accelerometer/accelerometer/acc_file
     chown radio system /sys/devices/virtual/sec/gsensorcal/calibration
 
-# Permissions for PegasusQ
+    # Permissions for PegasusQ
     chown system system /sys/devices/system/cpu/cpufreq/pegasusq
     chown system system /sys/devices/system/cpu/cpufreq/pegasusq/boost_freq
     chown system system /sys/devices/system/cpu/cpufreq/pegasusq/boost_lock_time
@@ -320,13 +301,10 @@ on post-fs-data
     chown system system /sys/devices/system/cpu/cpufreq/pegasusq/max_cpu_lock
     chown system system /sys/devices/system/cpu/cpufreq/pegasusq/sampling_rate
 
-# for device encryption
+    # for device encryption
     setprop vold.post_fs_data_done 1
 
-# Touchkeys
-    write /sys/devices/virtual/sec/sec_touchkey/touchkey_led_on_keypress 1
-
-# Enable LED-notification via BLN
+    # Enable LED-notification via BLN
     write /sys/devices/virtual/misc/backlightnotification/enabled 1
     write /sys/devices/virtual/misc/backlightnotification/led_blink_enabled 1
 
@@ -336,36 +314,21 @@ on boot
 
     setprop sys.usb.ffs.aio_compat 1
 
-# Wifi firmware reload path
+    # Wifi firmware reload path
     chown wifi wifi /sys/module/dhd/parameters/firmware_path
-# permissions for NFC
-    setprop ro.nfc.port "I2C"
-    chmod 0600 /dev/pn544
-    chown nfc nfc /dev/pn544
 
-# fake some battery state
-    setprop status.battery.state Slow
-    setprop status.battery.level 5
-    setprop status.battery.level_raw  50
-    setprop status.battery.level_scale 9
-
-# increase read-ahead value to 256 kb
+    # increase read-ahead value to 256 kb
     write /sys/block/mmcblk0/queue/read_ahead_kb 256
 
-# Flash storage isn't a good entropy source, and only causes
-# locking overhead in the kernel. Turn it off.
+    # Flash storage isn't a good entropy source, and only causes
+    # locking overhead in the kernel. Turn it off.
     write /sys/block/mmcblk0/queue/add_random 0
     write /sys/block/mmcblk1/queue/add_random 0
 
-# KSM
-#    write /sys/kernel/mm/ksm/pages_to_scan 100
-#    write /sys/kernel/mm/ksm/sleep_millisecs 500
-#    write /sys/kernel/mm/ksm/run 1
-
-# Swapping 1 page at a time is ok
+    # Swapping 1 page at a time is ok
     write /proc/sys/vm/page-cluster 0
 
-# Swappiness
+    # Swappiness
     write /proc/sys/vm/swappiness 100
 
 # For RIL
