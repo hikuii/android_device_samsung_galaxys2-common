@@ -72,8 +72,7 @@ endif
 
 # Packages
 PRODUCT_PACKAGES := \
-    com.android.future.usb.accessory \
-    Snap
+    com.android.future.usb.accessory
 
 # USB
 PRODUCT_PACKAGES += \
@@ -141,12 +140,10 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl-legacy \
     camera.device@1.0-impl-legacy \
     camera.smdk4210 \
-    Snap \
     libstagefright-shim
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media/mediaserver.rc:system/etc/init/mediaserver.rc
-
 
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.stagefright.ccodec=0 \
