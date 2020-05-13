@@ -638,7 +638,7 @@ struct hw_module_t HAL_MODULE_INFO_SYM = {
 	.module_api_version = 1,
 	.hal_api_version = 0,
 	.id = GPS_HARDWARE_MODULE_ID,
-	.name = "GSD4t GPS shim",
+	.name = "SMDK4210 GPS shim",
 	.author = "The CyanogenMod Project",
 	.methods = &gps_module_methods
 };
