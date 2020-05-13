@@ -63,8 +63,12 @@ $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330
 
 # GPS
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/configs/gps/gps_debug.conf:system/etc/gps_debug.conf \
+    $(COMMON_PATH)/configs/gps/gps_debug.conf:system/etc/gps_debug.conf
+
+ifneq ($(filter i9100,$(TARGET_DEVICE)),)
+PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/gps/sirfgps.conf:system/etc/sirfgps.conf
+endif
 
 # Packages
 PRODUCT_PACKAGES := \
