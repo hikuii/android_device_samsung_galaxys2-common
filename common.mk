@@ -15,8 +15,7 @@
 #
 COMMON_PATH := device/samsung/galaxys2-common
 
-DEVICE_PACKAGE_OVERLAYS := $(COMMON_PATH)/overlay \
-    $(COMMON_PATH)/overlay-lineage
+DEVICE_PACKAGE_OVERLAYS := $(COMMON_PATH)/overlay
 
 # Rootdir
 PRODUCT_COPY_FILES := \
@@ -27,7 +26,7 @@ PRODUCT_COPY_FILES := \
 
 # TWRP
 ifeq ($(RECOVERY_VARIANT),twrp)
-$(call inherit-product, device/samsung/galaxys2-common/twrp/twrp.mk)
+$(call inherit-product, device/samsung/galaxys2-common/packages/twrp/twrp.mk)
 else
 TARGET_RECOVERY_FSTAB := device/samsung/galaxys2-common/rootdir/fstab.smdk4210
 endif
@@ -39,15 +38,15 @@ PRODUCT_COPY_FILES += \
 
 # Netflix hack
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/configs/98netflix:system/etc/init.d/98netflix
+    $(COMMON_PATH)/configs/misc/98netflix:system/etc/init.d/98netflix
 
 # Audio
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/configs/tinyalsa-audio.xml:system/etc/tinyalsa-audio.xml \
-    $(COMMON_PATH)/configs/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
-    $(COMMON_PATH)/configs/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
-    $(COMMON_PATH)/configs/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
-    $(COMMON_PATH)/configs/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml
+    $(COMMON_PATH)/configs/audio/tinyalsa-audio.xml:system/etc/tinyalsa-audio.xml \
+    $(COMMON_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
+    $(COMMON_PATH)/configs/audio/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
+    $(COMMON_PATH)/configs/audio/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
+    $(COMMON_PATH)/configs/audio/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml
 
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
@@ -55,9 +54,9 @@ PRODUCT_COPY_FILES += \
 
 # Wifi
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/configs/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
-    $(COMMON_PATH)/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
-    $(COMMON_PATH)/configs/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
+    $(COMMON_PATH)/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+    $(COMMON_PATH)/configs/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
+    $(COMMON_PATH)/configs/wifi/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
 
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
@@ -66,9 +65,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
 
-# Gps
+# GPS
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/configs/sirfgps.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sirfgps.conf
+    $(COMMON_PATH)/configs/gps/sirfgps.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sirfgps.conf
 
 # Packages
 PRODUCT_PACKAGES := \
@@ -158,7 +157,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # HIDL manifest
 PRODUCT_COPY_FILES += \
-    device/samsung/galaxys2-common/manifest.xml:system/vendor/manifest.xml
+    device/samsung/galaxys2-common/configs/manifest.xml:system/vendor/manifest.xml
 
 # MFC API
 PRODUCT_PACKAGES += \
@@ -190,8 +189,8 @@ PRODUCT_PACKAGES += \
     libOMX.SEC.M4V.Encoder
 
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
-    $(COMMON_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
+    $(COMMON_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml \
+    $(COMMON_PATH)/configs/media/media_profiles.xml:system/etc/media_profiles.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
@@ -288,11 +287,11 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/excluded-input-devices.xml:system/etc/excluded-input-devices.xml
+    $(LOCAL_PATH)/configs/input/excluded-input-devices.xml:system/etc/excluded-input-devices.xml
 
 # Seccomp
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/seccomp/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
+    $(LOCAL_PATH)/configs/seccomp/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
 
 # Include exynos4 platform specific parts
 TARGET_HAL_PATH := hardware/samsung/exynos4/hal
