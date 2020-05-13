@@ -78,7 +78,7 @@ EXTENDED_FONT_FOOTPRINT := true
 MALLOC_SVELTE := true
 
 # Filesystem
-TARGET_FS_CONFIG_GEN := device/samsung/galaxys2-common/config.fs
+TARGET_FS_CONFIG_GEN := device/samsung/galaxys2-common/configs/fs/config.fs
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
@@ -95,10 +95,10 @@ TARGET_RELEASETOOLS_EXTENSIONS := ./device/samsung/galaxys2-common
 
 # Hardware tunables
 BOARD_HARDWARE_CLASS := hardware/samsung/lineagehw \
-    device/samsung/galaxys2-common/lineagehw
+    device/samsung/galaxys2-common/configs/lineagehw
 
 # Graphics
-BOARD_EGL_CFG := device/samsung/galaxys2-common/configs/egl.cfg
+BOARD_EGL_CFG := device/samsung/galaxys2-common/configs/graphics/egl.cfg
 USE_OPENGL_RENDERER := true
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
@@ -130,10 +130,7 @@ USE_XML_AUDIO_POLICY_CONF := 1
 # RIL
 BOARD_PROVIDES_LIBRIL := true
 BOARD_MODEM_TYPE := xmm6260
-BOARD_RIL_CLASS := ../../../device/samsung/galaxys2-common/ril
-
-# Key disabler
-JAVA_SOURCE_OVERLAYS := org.lineageos.keydisabler|$(DEVICE_PATH)/keydisabler|**/*.java
+BOARD_RIL_CLASS := ../../../device/samsung/galaxys2-common/configs/ril
 
 # Camera
 BOARD_CAMERA_HAVE_ISO := true
@@ -158,17 +155,15 @@ TARGET_NEEDS_NETD_DIRECT_CONNECT_RULE := true
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
-BOARD_CUSTOM_BT_CONFIG := device/samsung/galaxys2-common/bluetooth/vnd_smdk4210.txt
+BOARD_CUSTOM_BT_CONFIG := device/samsung/galaxys2-common/configs/bluetooth/vnd_smdk4210.txt
 
 # Selinux
 SELINUX_IGNORE_NEVERALLOWS := true
-BOARD_VENDOR_SEPOLICY_DIRS += device/samsung/galaxys2-common/selinux/vendor
-BOARD_PLAT_PUBLIC_SEPOLICY_DIR += device/samsung/galaxys2-common/selinux/public
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/samsung/galaxys2-common/selinux/private
+BOARD_VENDOR_SEPOLICY_DIRS += device/samsung/galaxys2-common/configs/selinux/vendor
+BOARD_PLAT_PUBLIC_SEPOLICY_DIR += device/samsung/galaxys2-common/configs/selinux/public
+BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/samsung/galaxys2-common/configs/selinux/private
 
 # Recovery
-BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/galaxys2-common/recovery/recovery_keys.c
-BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/galaxys2-common/recovery/graphics.c
 BOARD_UMS_LUNFILE := "/sys/class/android_usb/android0/f_mass_storage/lun%d/file"
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true

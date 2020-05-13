@@ -10,4 +10,4 @@ TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
 TW_CUSTOM_CPU_TEMP_PATH := "/sys/devices/platform/s5p-tmu/temperature"
 RECOVERY_SDCARD_ON_DATA := true
 TW_USE_TOOLBOX := true
-TARGET_RECOVERY_FSTAB := device/samsung/galaxys2-common/twrp/twrp.fstab
+TARGET_RECOVERY_FSTAB := device/samsung/galaxys2-common/packages/twrp/twrp.fstab
