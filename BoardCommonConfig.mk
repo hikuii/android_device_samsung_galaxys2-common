@@ -33,6 +33,13 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_USES_GRALLOC1 := true
 TARGET_USES_64_BIT_BINDER := true
 
+BOARD_GLOBAL_CFLAGS += -Ofast -march=armv7-a+simd -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp -funsafe-math-optimizations -frename-registers -funroll-loops -fopenmp --param l1-cache-line-size=32 --param l1-cache-size=32 --param l2-cache-size=1024
+BOARD_GLOBAL_CPPFLAGS += -Ofast -march=armv7-a+simd -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp -funsafe-math-optimizations -frename-registers -funroll-loops -fopenmp --param l1-cache-line-size=32 --param l1-cache-size=32 --param l2-cache-size=1024
+ARM_HAVE_NEON := true
+ARM_USE_PLD := true
+ARM_CACHE_LINE_SIZE := 32
+GLIBCXX_PARALLEL := true
+
 BOARD_VENDOR := samsung
 TARGET_BOARD_PLATFORM := exynos4
 TARGET_SOC := exynos4210
@@ -45,13 +52,12 @@ TARGET_NO_SEPARATE_RECOVERY := true
 TARGET_PROVIDES_INIT := true
 TARGET_PROVIDES_INIT_TARGET_RC := true
 
-#BOARD_NAND_PAGE_SIZE := 4096
-#BOARD_NAND_SPARE_SIZE := 128
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_BASE := 0x40000000
-BOARD_KERNEL_CMDLINE := console=ttySAC2,115200 consoleblank=0
 BOARD_KERNEL_IMAGE_NAME := zImage
 NEED_KERNEL_MODULE_SYSTEM := true
+BOARD_CUSTOM_BOOTIMG := true
+BOARD_CUSTOM_BOOTIMG_MK := device/samsung/galaxys2-common/shbootimg.mk
 TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 
 # Bionic
@@ -63,6 +69,16 @@ EXTENDED_FONT_FOOTPRINT := true
 
 # Memory management
 MALLOC_SVELTE := true
+
+# Dexpreopt
+ifeq ($(HOST_OS),linux)
+  ifneq ($(TARGET_BUILD_VARIANT),eng)
+    ifeq ($(WITH_DEXPREOPT),)
+      WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := false
+      WITH_DEXPREOPT := true
+    endif
+  endif
+endif
 
 # Filesystem
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -101,7 +117,7 @@ BOARD_USE_SYSFS_VSYNC_NOTIFICATION := true
 BOARD_NONBLOCK_MODE_PROCESS := true
 BOARD_USE_STOREMETADATA := true
 BOARD_USE_METADATABUFFERTYPE := true
-BOARD_USES_MFC_FPS := true
+BOARD_USES_MFC_FPS := false
 BOARD_USE_S3D_SUPPORT := true
 BOARD_USE_CSC_FIMC := false
 
@@ -165,10 +181,6 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 BOARD_USES_FULL_RECOVERY_IMAGE := true
 WITH_LINEAGE_CHARGER := false
-
-# Boot.img
-BOARD_CUSTOM_BOOTIMG := true
-BOARD_CUSTOM_BOOTIMG_MK := device/samsung/galaxys2-common/shbootimg.mk
 
 # Use the non-open-source parts, if they're present
 -include vendor/samsung/galaxys2-common/BoardConfigVendor.mk
