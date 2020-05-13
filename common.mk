@@ -72,7 +72,8 @@ endif
 
 # Packages
 PRODUCT_PACKAGES := \
-    com.android.future.usb.accessory
+    com.android.future.usb.accessory \
+    ParanoidDoze
 
 # USB
 PRODUCT_PACKAGES += \
