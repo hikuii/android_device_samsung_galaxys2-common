@@ -88,10 +88,6 @@ PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl \
     gps.smdk4210
 
-# SamsungPowerHAL
-PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-service.smdk4210
-
 # Battery
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.small_battery=true
