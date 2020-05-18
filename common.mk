@@ -62,6 +62,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
     net.tethering.noprovisioning=true
 
+# Packages
+PRODUCT_PACKAGES := \
+    com.android.future.usb.accessory
+
 # GPS
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/gps/gps_debug.conf:$(TARGET_COPY_OUT_VENDOR)/etc/gps.conf \
@@ -69,12 +73,15 @@ PRODUCT_COPY_FILES += \
 
 ifneq ($(filter i9100,$(TARGET_DEVICE)),)
 PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     $(COMMON_PATH)/configs/gps/sirfgps.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sirfgps.conf
-endif
 
-# Packages
-PRODUCT_PACKAGES := \
-    com.android.future.usb.accessory
+PRODUCT_PACKAGES += \
+    android.hardware.gnss@1.0-impl \
+    android.hardware.gnss@1.0-service.exynos4 \
+    gps.smdk4210
+
+endif
 
 # USB
 PRODUCT_PACKAGES += \
@@ -85,12 +92,6 @@ PRODUCT_PACKAGES += \
     libsamsung_symbols \
     libsecril-shim \
     libsecril-client
-
-# Legacy GPS
-PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl \
-    android.hardware.gnss@1.0-service.exynos4 \
-    gps.smdk4210
 
 # Battery
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -245,7 +246,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
     frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
-    frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/native/data/etc/android.hardware.location.xml:system/etc/permissions/android.hardware.location.xml \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
     frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
