@@ -680,8 +680,8 @@ static void patchMem(void *libHandle) {
 	 * relative timeouts, and a maximum time value can cause an overflow in
 	 * the function converting relative to absolute timespecs if unpatched.
 	 *
-	 * By patching this to 0x01FFFFFF from 0x7FFFFFFF, the timeout should
-	 * expire in about a year rather than 68 years, and the RIL should be good
+	 * By patching this to 0x001FFFFF from 0x7FFFFFFF, the timeout should
+	 * expire in about 24 days rather than 68 years, and the RIL should be good
 	 * up until the year 2036 or so.
 	 */
 	uint32_t *MAX_TIMEOUT;
@@ -694,7 +694,7 @@ static void patchMem(void *libHandle) {
 	RLOGD("%s: MAX_TIMEOUT found at %p!", __FUNCTION__, MAX_TIMEOUT);
 	RLOGD("%s: MAX_TIMEOUT is currently 0x%" PRIX32, __FUNCTION__, *MAX_TIMEOUT);
 	if (CC_LIKELY(*MAX_TIMEOUT == 0x7FFFFFFF)) {
-		*MAX_TIMEOUT = 0x01FFFFFF;
+		*MAX_TIMEOUT = 0x001FFFFF;
 		RLOGI("%s: MAX_TIMEOUT was changed to 0x0%" PRIX32, __FUNCTION__, *MAX_TIMEOUT);
 	} else {
 		RLOGW("%s: MAX_TIMEOUT was not 0x7FFFFFFF; leaving alone", __FUNCTION__);
