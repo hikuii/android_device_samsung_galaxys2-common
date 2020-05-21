@@ -111,10 +111,6 @@ BOARD_ROOT_EXTRA_SYMLINKS := /data/tombstones:/tombstones
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := ./device/samsung/galaxys2-common
 
-# Hardware tunables
-BOARD_HARDWARE_CLASS := hardware/samsung/lineagehw \
-    device/samsung/galaxys2-common/configs/lineagehw
-
 # Graphics
 BOARD_EGL_CFG := device/samsung/galaxys2-common/configs/graphics/egl.cfg
 USE_OPENGL_RENDERER := true
@@ -199,7 +195,6 @@ BOARD_BATTERY_DEVICE_NAME := "battery"
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 BOARD_USES_FULL_RECOVERY_IMAGE := true
-WITH_LINEAGE_CHARGER := false
 
 # Use the non-open-source parts, if they're present
 -include vendor/samsung/galaxys2-common/BoardConfigVendor.mk
