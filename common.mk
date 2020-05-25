@@ -31,6 +31,8 @@ else
 TARGET_RECOVERY_FSTAB := device/samsung/galaxys2-common/rootdir/fstab.smdk4210
 endif
 
+# Recovery update
+PRODUCT_PROPERTY_OVERRIDES += persist.sys.recovery_update=false
 
 # Recovery rootdir
 PRODUCT_COPY_FILES += \
