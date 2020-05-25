@@ -101,6 +101,8 @@ BOARD_HARDWARE_CLASS := hardware/samsung/lineagehw \
 
 # Graphics
 BOARD_EGL_CFG := device/samsung/galaxys2-common/configs/graphics/egl.cfg
+MAX_EGL_CACHE_KEY_SIZE := 12*1024
+MAX_EGL_CACHE_SIZE := 2048*1024
 USE_OPENGL_RENDERER := true
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
