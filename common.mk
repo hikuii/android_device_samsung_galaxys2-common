@@ -68,12 +68,15 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/gps/gps_debug.conf:system/etc/gps_debug.conf
 
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl \
-    gps.smdk4210
+    android.hardware.gnss@1.0-impl
 
 ifneq ($(filter i9100,$(TARGET_DEVICE)),)
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/gps/sirfgps.conf:system/etc/sirfgps.conf
+
+PRODUCT_PACKAGES += \
+    gps.smdk4210
+
 endif
 
 # USB
