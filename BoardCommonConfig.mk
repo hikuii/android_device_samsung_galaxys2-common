@@ -72,7 +72,14 @@ EXTENDED_FONT_FOOTPRINT := true
 MALLOC_SVELTE := true
 
 # Dexpreopt
-WITH_DEXPREOPT := false
+ifeq ($(HOST_OS),linux)
+  ifneq ($(TARGET_BUILD_VARIANT),eng)
+    ifeq ($(WITH_DEXPREOPT),)
+      WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := false
+      WITH_DEXPREOPT := true
+    endif
+  endif
+endif
 
 # Filesystem
 TARGET_USERIMAGES_USE_EXT4 := true
