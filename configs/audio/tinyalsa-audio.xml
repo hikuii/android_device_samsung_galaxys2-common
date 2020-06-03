@@ -49,10 +49,14 @@
 			<path type="enable">
 				<ctrl name="Speaker Playback Volume" value="26" />
 				<ctrl name="Speaker Playback Switch" value="on" />
+				<ctrl name="Receiver Playback Volume" value="26" />
+				<ctrl name="Receiver Playback Switch" value="on" />
 			</path>
 			<path type="disable">
 				<ctrl name="Speaker Playback Volume" value="0" />
 				<ctrl name="Speaker Playback Switch" value="off" />
+				<ctrl name="Receiver Playback Volume" value="0" />
+				<ctrl name="Receiver Playback Switch" value="off" />
 			</path>
 		</device>
 		<device type="wired-headphone">

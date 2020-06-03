@@ -362,6 +362,7 @@ struct yamaha_mc1n2_audio_params_route galaxys2_params_routes[] = {
 		.path_info.asBias[0].abSrcOnOff = { 0 },
 
 		.path_info.asSpOut[0].abSrcOnOff[5] = MCDRV_SRC5_DAC_M_ON,
+		.path_info.asRcOut[0].abSrcOnOff[5] = MCDRV_SRC5_DAC_R_ON | MCDRV_SRC5_DAC_L_ON,
 		.path_info.asDac[0].abSrcOnOff[6] = MCDRV_SRC6_MIX_ON,
 		.path_info.asMix[0].abSrcOnOff[3] = MCDRV_SRC3_DIR0_ON,
 
