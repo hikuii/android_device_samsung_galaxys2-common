@@ -41,7 +41,7 @@ case $USERINPUT in
 	echo "Extracting modified Magisk-ramdisk from /dev/block/mmcblk0p5..."
 	adb shell dd if=/dev/block/mmcblk0p5 of=/tmp/boot.img.magisk
 	adb pull /tmp/boot.img.magisk
-	abootimg -x boot.img.magisk
+	../../../../device/samsung/galaxys2-common/magisk/abootimg -x boot.img.magisk
 	adb shell rm /tmp/boot.img.magisk
 	rm ramdisk.cpio
 	rm bootimg.cfg
