@@ -58,7 +58,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Packages
 PRODUCT_PACKAGES := \
-    WallpaperPicker \
     com.android.future.usb.accessory
 
 # GPS
