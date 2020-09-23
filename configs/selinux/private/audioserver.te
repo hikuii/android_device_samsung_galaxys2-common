@@ -1,1 +1,0 @@
-allow audioserver audioserver_tmpfs:file execute;

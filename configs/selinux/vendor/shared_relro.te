@@ -1,1 +1,0 @@
-allow shared_relro method_trace_data_file:file { getattr open read unlink };
