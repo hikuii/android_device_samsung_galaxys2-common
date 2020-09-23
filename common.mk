@@ -92,10 +92,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.small_battery=true
 
-# Trust HAL
-PRODUCT_PACKAGES += \
-    vendor.lineage.trust@1.0-service
-
 # Audio Packages
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
